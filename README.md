@@ -148,6 +148,63 @@ slotgame/
     └── app.py              # Application composition root
 ```
 
+## Building Executables
+
+### Download Pre-built Executables
+
+Check the [Releases](https://github.com/Hypnopompia/Slotgame/releases) page for pre-built executables for Windows, macOS, and Linux.
+
+### Build Locally with PyInstaller
+
+You can build a standalone executable for your platform:
+
+```bash
+# Install PyInstaller
+pip install pyinstaller
+
+# Build executable
+pyinstaller --onefile --windowed --name "SlotMachine" main.py
+```
+
+The executable will be in the `dist/` folder.
+
+#### Platform-specific notes:
+
+**macOS:**
+```bash
+pyinstaller --onefile --windowed --name "SlotMachine" main.py
+# Creates dist/SlotMachine.app
+```
+
+**Windows:**
+```cmd
+pyinstaller --onefile --windowed --name "SlotMachine" main.py
+# Creates dist\SlotMachine.exe
+```
+
+**Linux:**
+```bash
+pyinstaller --onefile --name "SlotMachine" main.py
+# Creates dist/SlotMachine
+chmod +x dist/SlotMachine
+```
+
+### Automated Builds (GitHub Actions)
+
+This repository includes a GitHub Actions workflow that automatically builds executables for all platforms when you create a release tag:
+
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+This triggers the build workflow and creates a GitHub Release with downloadable executables for:
+- macOS (`.zip` containing `.app` bundle)
+- Windows (`.exe`)
+- Linux (binary)
+
+You can also manually trigger a build from the Actions tab using "workflow_dispatch".
+
 ## Configuration
 
 Game settings can be modified in `config.py`:
