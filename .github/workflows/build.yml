@@ -45,8 +45,8 @@ jobs:
       - name: Build executable (macOS)
         if: runner.os == 'macOS'
         run: |
-          pyinstaller --onefile --windowed --name "SlotMachine" \
-            --add-data "config.py:." \
+          pyinstaller --onedir --windowed --name "SlotMachine" \
+            --osx-bundle-identifier "com.hypnopompia.slotmachine" \
             main.py
           # Create a zip of the .app bundle
           cd dist
